@@ -1,14 +1,19 @@
-const mongoose = require('mongoose');
-const app = require('./app');
+const mongoose = require("mongoose");
+const app = require("./app");
+
+const DB = process.env.DATABASE.replace(
+  /<PASSWORD>/,
+  process.env.DATABASE_PASSWORD
+);
 
 mongoose
-  .connect(process.env.DB, {
+  .connect(DB, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
-  .then(() => console.log('Connected to Mongo successfully!'));
+  .then(() => console.log("Connected to Mongo successfully!"));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
