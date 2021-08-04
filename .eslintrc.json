@@ -5,7 +5,6 @@
     "prettier/prettier": ["error",{
       "singleQuote":true
     }],
-    "no-undef":"off",
     "spaced-comment": "off",
     "no-console": "warn",
     "consistent-return": "off",
