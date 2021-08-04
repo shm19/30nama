@@ -17,16 +17,16 @@ const checkAndSend = (res, next, doc, statusCode = 200) => {
 module.exports.getOne = Model =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findById(req.params.id);
-    checkAndSend(doc, res, next);
+    checkAndSend(res, next, doc);
   });
 
-module.exports.updateone = Model =>
+module.exports.updateOne = Model =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
+    const doc = Model.findByIdAndUpdate(req.params.id, req.body, {
       runValidators: true,
       new: true
     });
-    checkAndSend(doc, res, next);
+    checkAndSend(res, next, await doc);
   });
 
 module.exports.deleteOne = Model =>
@@ -58,7 +58,6 @@ module.exports.createOne = Model =>
 module.exports.getAll = Model =>
   catchAsync(async (req, res, next) => {
     const docs = await Model.find();
-
     if (docs.length > 0) {
       res.status(200).json({
         status: 'success',

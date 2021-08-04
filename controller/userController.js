@@ -1,31 +1,8 @@
 const userModel = require('../models/userModel');
+const handleFactory = require('./handleFactory');
 
-module.exports.getAllUsers = (req, res) => {
-  res.status(501).json({
-    message: 'Not implmented'
-  });
-};
-
-module.exports.getUser = (req, res) => {
-  res.status(501).json({
-    message: 'Not implmented'
-  });
-};
-
-module.exports.createUser = (req, res) => {
-  res.status(501).json({
-    message: 'Not implmented'
-  });
-};
-
-module.exports.deleteUser = (req, res) => {
-  res.status(501).json({
-    message: 'Not implmented'
-  });
-};
-
-module.exports.updateUser = (req, res) => {
-  res.status(501).json({
-    message: 'Not implmented'
-  });
-};
+module.exports.getAllUsers = handleFactory.getAll(userModel);
+module.exports.getUser = handleFactory.getOne(userModel);
+module.exports.createUser = handleFactory.createOne(userModel);
+module.exports.deleteUser = handleFactory.deleteOne(userModel);
+module.exports.updateUser = handleFactory.updateOne(userModel);
