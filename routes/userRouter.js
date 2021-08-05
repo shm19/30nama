@@ -11,6 +11,8 @@ router.use('', (req, res, next) => {
 router.post('/signup', authController.signUp);
 router.post('/login', authController.login);
 
+router.post('/updatepassword/:id', authController.updatePassword);
+
 router
   .route('/')
   .get(userController.getAllUsers)

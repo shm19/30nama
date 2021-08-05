@@ -78,7 +78,16 @@ module.exports.protect = catchAsync(async (req, res, next) => {
   req.user = user;
   next();
 });
-// module.exports.updatePassword = catchAsync(async (req, res, next) => {
-//   const { password } = req.body;
-
-// });
+module.exports.updatePassword = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id).select('+password');
+  if (!user) {
+    next(new AppError(`can't find any user with this Id`, 400));
+  }
+  if (!(await user.comparePassword(req.body.currentPassword, user.password))) {
+    next(new AppError(`Wrong password`, 401));
+  }
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+  createAndSendJWT(user, res);
+});

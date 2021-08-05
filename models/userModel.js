@@ -13,6 +13,12 @@ const userSchema = new mongoose.Schema({
     unique: [true, 'each user should have a unique email'],
     validate: [validator.isEmail, 'provie a valid email']
   },
+  role: {
+    type: 'string',
+    default: 'user',
+    enum: ['user', 'admin'],
+    message: 'Role can be either user or admin'
+  },
   password: {
     type: 'string',
     minLength: [8, 'password should at least have 9 characters'],
