@@ -11,11 +11,16 @@ router.use('', (req, res, next) => {
 router.post('/signup', authController.signUp);
 router.post('/login', authController.login);
 
+router.post('/forgotpassword', authController.forgotPassword);
 router.post('/updatepassword/:id', authController.updatePassword);
+router.patch(
+  '/resetpassword/:passwordResetToken',
+  authController.resetPassword
+);
 
 router
   .route('/')
-  .get(userController.getAllUsers)
+  .get(authController.protect, userController.getAllUsers)
   .post(userController.createUser);
 
 router

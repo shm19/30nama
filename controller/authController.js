@@ -1,14 +1,15 @@
 /**
  * reset password
- * update password
- * protect
  */
+
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
+const crypto = require('crypto');
 
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
+const sendMail = require('../utils/email');
 
 const signJwt = id =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -54,13 +55,7 @@ module.exports.login = catchAsync(async (req, res, next) => {
 });
 
 module.exports.protect = catchAsync(async (req, res, next) => {
-  let token;
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
-    token = req.headers.authorization.split(' ')[1];
-  }
+  const token = req.headers.authorization.split(' ')[1];
   if (!token) {
     return next(new AppError('You are not logged In', 401));
   }
@@ -78,6 +73,7 @@ module.exports.protect = catchAsync(async (req, res, next) => {
   req.user = user;
   next();
 });
+
 module.exports.updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.params.id).select('+password');
   if (!user) {
@@ -88,6 +84,60 @@ module.exports.updatePassword = catchAsync(async (req, res, next) => {
   }
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+  createAndSendJWT(user, res);
+});
+
+module.exports.forgotPassword = async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+  try {
+    if (!user) {
+      next(new AppError('No user found with this email'), 404);
+    }
+    const resetToken = await user.createPasswordRestToken();
+    await user.save({ validateBeforeSave: false });
+    await sendMail({
+      from: '30namaAdmin@gmail.com',
+      to: user.email,
+      subject: 'Password reset token',
+      text: resetToken
+    });
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Password reset token send to your email address'
+    });
+  } catch (err) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpiresAt = undefined;
+    await user.save({ validateBeforeSave: false });
+    return next(
+      new AppError(
+        'There was an error sending the email. Try again later!',
+        500
+      )
+    );
+  }
+};
+
+module.exports.resetPassword = catchAsync(async (req, res, next) => {
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(req.params.passwordResetToken)
+    .digest('hex');
+
+  const user = await User.findOne({
+    passwordResetToken: hashedToken,
+    passwordResetExpiresAt: { $gt: Date.now() }
+  });
+
+  if (!user) {
+    next(new AppError('Token is invalid or has expired'), 400);
+  }
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpiresAt = undefined;
   await user.save();
   createAndSendJWT(user, res);
 });
