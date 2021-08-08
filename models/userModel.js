@@ -54,6 +54,11 @@ userSchema.pre('save', async function(next) {
   next();
 });
 
+userSchema.pre(/^find/, function(next) {
+  this.select('-__v');
+  next();
+});
+
 userSchema.methods.comparePassword = async (inputPassword, userPassword) =>
   await bcrypt.compare(inputPassword, userPassword);
 

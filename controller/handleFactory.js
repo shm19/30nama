@@ -2,13 +2,14 @@ const ApiFeatures = require('../utils/apiFeatures');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-const checkAndSend = (res, next, doc, statusCode = 200) => {
+const checkAndSend = (req, res, next, doc, statusCode = 200) => {
   if (!doc) {
     return next(new AppError('No document found with that ID', 404));
   }
 
   res.status(statusCode).json({
     status: 'success',
+    requestedAt: req.requestedAt,
     data: {
       data: doc
     }
@@ -18,7 +19,7 @@ const checkAndSend = (res, next, doc, statusCode = 200) => {
 module.exports.getOne = Model =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findById(req.params.id);
-    checkAndSend(res, next, doc);
+    checkAndSend(req, res, next, doc);
   });
 
 module.exports.updateOne = Model =>
@@ -27,7 +28,7 @@ module.exports.updateOne = Model =>
       runValidators: true,
       new: true
     });
-    checkAndSend(res, next, await doc);
+    checkAndSend(req, res, next, await doc);
   });
 
 module.exports.deleteOne = Model =>
@@ -39,6 +40,7 @@ module.exports.deleteOne = Model =>
 
     res.status(204).json({
       status: 'success',
+      requestedAt: req.requestedAt,
       data: null
     });
   });
@@ -48,6 +50,7 @@ module.exports.createOne = Model =>
     const doc = await Model.create(req.body);
     res.status(201).json({
       status: 'success',
+      requestedAt: req.requestedAt,
       data: {
         data: doc
       }
@@ -65,8 +68,9 @@ module.exports.getAll = Model =>
     res.status(200).json({
       status: 'success',
       results: docs.length,
+      requestedAt: req.requestedAt,
       data: {
-        data: docs
+        docs
       }
     });
   });

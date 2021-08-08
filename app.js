@@ -17,6 +17,11 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views')); //not nessecerry
 
+app.use('', (req, res, next) => {
+  req.requestedAt = `${new Date().toLocaleTimeString()} - ${new Date().toLocaleDateString()}}`;
+  next();
+});
+
 app.use('/api/v1/users', userRouter);
 
 app.all('*', (req, res, next) =>

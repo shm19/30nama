@@ -55,6 +55,9 @@ module.exports.login = catchAsync(async (req, res, next) => {
 });
 
 module.exports.protect = catchAsync(async (req, res, next) => {
+  if (!req.headers.authorization) {
+    return next(new AppError('You are not logged In', 401));
+  }
   const token = req.headers.authorization.split(' ')[1];
   if (!token) {
     return next(new AppError('You are not logged In', 401));
@@ -140,4 +143,13 @@ module.exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetExpiresAt = undefined;
   await user.save();
   createAndSendJWT(user, res);
+});
+
+module.exports.getMe = catchAsync(async (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: req.user
+    }
+  });
 });
