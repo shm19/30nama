@@ -34,9 +34,8 @@ class ApiFeatures {
     if (this._queryStr.fields) {
       const selectedFields = this._queryStr.fields.split(',').join(' ');
       this._query.select(selectedFields);
-    } else {
-      this._query.select('-__v');
     }
+    this._query.select('-__v');
     return this;
   }
 

@@ -8,11 +8,28 @@ const movieSchema = new mongoose.Schema({
     maxLength: [30, 'Name length should be less then this'],
     require: [true, 'Movie should have a name']
   },
-  productionYear: Number,
+  productionYear: {
+    type: Number,
+    min: [1900, 'mimiumn production year is 1900'],
+    max: [
+      new Date().getFullYear(),
+      `maximum production year is ${new Date().getFullYear()}`
+    ],
+    required: [true, 'Movie should have a production year']
+  },
   country: String,
-  director: String,
-  stars: [String],
-  imdbScore: Number,
+  director: {
+    type: String,
+    required: [true, 'Movie should have a director']
+  },
+  stars: {
+    type: [String],
+    required: [true, 'Movie should have casts']
+  },
+  imdbScore: {
+    type: Number,
+    required: [true, 'Movie should have an IMDB score']
+  },
   summery: String,
   ratingsAverage: {
     type: Number,

@@ -5,9 +5,10 @@ const morgan = require('morgan');
 
 dotenv.config({ path: path.join(__dirname, 'config.env') });
 
-const userRouter = require('./routes/userRouter');
 const globalErrorHandler = require('./controller/errorController');
 const AppError = require('./utils/appError');
+const userRouter = require('./routes/userRouter');
+const movieRouter = require('./routes/movieRouter');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use('', (req, res, next) => {
 });
 
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/movies', movieRouter);
 
 app.all('*', (req, res, next) =>
   next(

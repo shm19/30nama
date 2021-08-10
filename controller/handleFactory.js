@@ -18,7 +18,7 @@ const checkAndSend = (req, res, next, doc, statusCode = 200) => {
 
 module.exports.getOne = Model =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.findById(req.params.id);
+    const doc = await Model.findById(req.params.id).select('-__v');
     checkAndSend(req, res, next, doc);
   });
 
