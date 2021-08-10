@@ -1,7 +1,3 @@
-/**
- * reset password
- */
-
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const crypto = require('crypto');
@@ -16,6 +12,7 @@ const signJwt = id =>
     expiresIn: process.env.JWT_EXPIRES_IN
   });
 
+// This will use signJWT and create token and send response and token
 const createAndSendJWT = (user, res) => {
   const token = signJwt(user._id);
 
@@ -78,12 +75,13 @@ module.exports.protect = catchAsync(async (req, res, next) => {
 });
 
 module.exports.updatePassword = catchAsync(async (req, res, next) => {
+  // Or we can get user from token by using protect middleware which is better i guess
   const user = await User.findById(req.params.id).select('+password');
   if (!user) {
-    next(new AppError(`can't find any user with this Id`, 400));
+    return next(new AppError(`can't find any user with this Id`, 400));
   }
   if (!(await user.comparePassword(req.body.currentPassword, user.password))) {
-    next(new AppError(`Wrong password`, 401));
+    return next(new AppError(`Wrong password`, 401));
   }
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
@@ -91,11 +89,15 @@ module.exports.updatePassword = catchAsync(async (req, res, next) => {
   createAndSendJWT(user, res);
 });
 
+/**
+ * This function will sned resetToken created by crypto package by nodemailer to user email
+ * and then save hashed resetToken into db and wait for resetPassword request by token
+ */
 module.exports.forgotPassword = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
   try {
     if (!user) {
-      next(new AppError('No user found with this email'), 404);
+      return next(new AppError('No user found with this email'), 404);
     }
     const resetToken = await user.createPasswordRestToken();
     await user.save({ validateBeforeSave: false });
@@ -123,6 +125,7 @@ module.exports.forgotPassword = async (req, res, next) => {
   }
 };
 
+// This function comes after forgot password and reset password by reset token
 module.exports.resetPassword = catchAsync(async (req, res, next) => {
   const hashedToken = crypto
     .createHash('sha256')
@@ -135,7 +138,7 @@ module.exports.resetPassword = catchAsync(async (req, res, next) => {
   });
 
   if (!user) {
-    next(new AppError('Token is invalid or has expired'), 400);
+    return next(new AppError('Token is invalid or has expired'), 400);
   }
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
