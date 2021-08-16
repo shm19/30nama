@@ -3,11 +3,10 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
+const schemaOption = require('../utils/schemaOptoin');
+
 const userSchema = new mongoose.Schema({
-  name: {
-    type: 'string',
-    required: [true, 'user should have a name']
-  },
+  name: schemaOption.nameObj('User'),
   email: {
     type: 'string',
     required: [true, 'user should have an email'],
@@ -15,10 +14,10 @@ const userSchema = new mongoose.Schema({
     validate: [validator.isEmail, 'provie a valid email']
   },
   role: {
-    type: 'string',
+    type: String,
     default: 'user',
     enum: ['user', 'admin'],
-    message: 'Role can be either user or admin'
+    message: `Role should be one of these user or admin`
   },
   password: {
     type: 'string',

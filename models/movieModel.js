@@ -17,14 +17,17 @@ const movieSchema = new mongoose.Schema({
     ],
     required: [true, 'Movie should have a production year']
   },
+  stars: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Actor',
+      requried: [true, 'movie should have casts']
+    }
+  ],
   country: String,
   director: {
     type: String,
     required: [true, 'Movie should have a director']
-  },
-  stars: {
-    type: [String],
-    required: [true, 'Movie should have casts']
   },
   imdbScore: {
     type: Number,
@@ -41,6 +44,11 @@ const movieSchema = new mongoose.Schema({
     defualt: 0
   },
   link: String
+});
+
+movieSchema.pre(/^find/, function(next) {
+  this.populate('stars');
+  next();
 });
 
 const movieModel = mongoose.model('Movie', movieSchema);
