@@ -1,9 +1,11 @@
 const express = require('express');
 
 const movieController = require('../controller/movieController');
+const reviewRouter = require('../routes/reviewRouter');
 
 const router = express.Router();
 
+router.use('/:movieId/reviews', reviewRouter);
 router
   .route('/')
   .get(movieController.getAllMovies)
