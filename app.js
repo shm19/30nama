@@ -7,10 +7,7 @@ dotenv.config({ path: path.join(__dirname, 'config.env') });
 
 const globalErrorHandler = require('./controller/errorController');
 const AppError = require('./utils/appError');
-const userRouter = require('./routes/userRouter');
-const movieRouter = require('./routes/movieRouter');
-const actorRouter = require('./routes/actorRouter');
-const reviewRouter = require('./routes/reviewRouter');
+const apiRouter = require('./routes/apiRoutes');
 
 const app = express();
 
@@ -25,10 +22,7 @@ app.use('', (req, res, next) => {
   next();
 });
 
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/movies', movieRouter);
-app.use('/api/v1/actors', actorRouter);
-app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1', apiRouter);
 
 app.all('*', (req, res, next) =>
   next(

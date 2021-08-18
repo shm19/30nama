@@ -6,3 +6,7 @@ module.exports.getAllMovies = handleFactory.getAll(movieModel);
 module.exports.updateMovie = handleFactory.updateOne(movieModel);
 module.exports.deleteMovie = handleFactory.deleteOne(movieModel);
 module.exports.createMovie = handleFactory.createOne(movieModel);
+
+/**
+ * Let's implement aggreagation for some more used routes and search
+ */
