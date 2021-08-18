@@ -28,8 +28,11 @@ const actorSchema = new mongoose.Schema(
 
 actorSchema.virtual('age').get(function() {
   const { birthDay } = this;
-  const diff = new Date().getTime() - birthDay.getTime();
-  return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+  if (birthDay) {
+    const diff = new Date().getTime() - birthDay.getTime();
+    return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+  }
+  // return undefined;
 });
 
 // can't do this

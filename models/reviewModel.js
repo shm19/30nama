@@ -23,10 +23,15 @@ const reviewSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    defualt: Date.now()
+    default: Date.now()
   }
 });
 
-const reviewModel = reviewSchema.model('Review', reviewSchema);
+reviewSchema.pre(/^find/, function(next) {
+  // this.populate('movie');
+  // this.populate('user');
+  next();
+});
+const reviewModel = mongoose.model('Review', reviewSchema);
 
 module.exports = reviewModel;
