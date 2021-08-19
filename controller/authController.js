@@ -16,7 +16,7 @@ const signJwt = id =>
 const createAndSendJWT = (user, res) => {
   const token = signJwt(user._id);
 
-  res.cookie('jwt', process.env.JWT_SECRET, {
+  res.cookie('jwt', token, {
     expiresIn:
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
     usehttp: true,
