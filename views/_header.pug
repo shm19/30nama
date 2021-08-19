@@ -1,6 +1,6 @@
-mixin liNavItem(text)
+mixin liNavItem(text,link)
   li.nav-item
-    a.nav-link(href='#') text
+    a.nav-link(href=link) #{text}
 
 
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
@@ -8,9 +8,9 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
     ul.navbar-nav.me-auto.mb-2.mb-lg-0
       li.nav-item
         a.nav-link.active(aria-current="page" href="#") 30nama
-      +liNavItem('Home')
-      +liNavItem('Signup')
-      +liNavItem('Login')
+      +liNavItem('Home','/')
+      +liNavItem('Signup','/signup')
+      +liNavItem('Login','/login')
 
     div.w-25
       form.d-flex

@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 dotenv.config({ path: path.join(__dirname, 'config.env') });
 
@@ -15,10 +16,12 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views')); //not nessecerry
 
 app.use('', (req, res, next) => {
+  console.log(req.cookies);
   req.requestedAt = `${new Date().toLocaleTimeString()} - ${new Date().toLocaleDateString()}}`;
   next();
 });
