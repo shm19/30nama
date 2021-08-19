@@ -8,6 +8,7 @@ dotenv.config({ path: path.join(__dirname, 'config.env') });
 const globalErrorHandler = require('./controller/errorController');
 const AppError = require('./utils/appError');
 const apiRouter = require('./routes/apiRoutes');
+const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use('', (req, res, next) => {
 
 app.use('/api/v1', apiRouter);
 
+app.use('/', viewRouter);
 app.all('*', (req, res, next) =>
   next(
     new AppError(`Can't find any routes for ${req.originalUrl} on server`, 404)
