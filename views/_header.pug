@@ -9,8 +9,12 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
       li.nav-item
         a.nav-link.active(aria-current="page" href="#") 30nama
       +liNavItem('Home','/')
-      +liNavItem('Signup','/signup')
-      +liNavItem('Login','/login')
+      if !user
+        +liNavItem('Signup','/signup')
+        +liNavItem('Login','/login')
+      else
+        +liNavItem(`Logout`,'/logout')
+        +liNavItem(`${user.name} Is LoggedIn`,'/me')
 
     div.w-25
       form.d-flex

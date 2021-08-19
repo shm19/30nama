@@ -69,9 +69,33 @@ module.exports.protect = catchAsync(async (req, res, next) => {
       )
     );
   }
+
   // you should also check if user changed it password after reciving this token by passwordChangedAt field
   req.user = user;
-  next();
+  return next();
+});
+
+module.exports.isLoggedIn = async (req, res, next) => {
+  try {
+    const token = req.cookies.jwt;
+    if (!token) return next();
+    const decode = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    const user = await User.findById(decode.id);
+    if (!user) return next();
+    res.locals.user = user;
+  } catch (err) {
+    return next();
+  }
+  return next();
+};
+
+module.exports.logout = catchAsync(async (req, res, next) => {
+  res.cookie('jwt', 'loggedout', {
+    expiresIn: Date.now() + 1000,
+    usehttp: true,
+    secure: true
+  });
+  setTimeout(() => res.redirect('/'), 500);
 });
 
 module.exports.updatePassword = catchAsync(async (req, res, next) => {

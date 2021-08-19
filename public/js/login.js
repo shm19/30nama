@@ -18,6 +18,9 @@ $(loginBtn).on('click', function() {
   })
     .done(function(response) {
       console.log(response);
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 1000);
     })
     .fail(function(jqXHR, textStatus, errorTh) {
       console.log(jqXHR);

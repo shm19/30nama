@@ -21,7 +21,6 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views')); //not nessecerry
 
 app.use('', (req, res, next) => {
-  console.log(req.cookies);
   req.requestedAt = `${new Date().toLocaleTimeString()} - ${new Date().toLocaleDateString()}}`;
   next();
 });

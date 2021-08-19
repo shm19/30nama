@@ -1,12 +1,16 @@
 const express = require('express');
 
+const viewController = require('../controller/viewController');
+const authController = require('../controller/authController');
+
 const router = express.Router();
 
+router.use('/', authController.isLoggedIn);
 router.get('/', (req, res) => {
-  res.render('base.pug');
+  res.render('base.pug', { title: 'Home' });
 });
 
-router.get('/login', (req, res) => {
-  res.status(200).render('login.pug');
-});
+router.get('/login', viewController.login);
+router.get('/logout', authController.logout);
+
 module.exports = router;
