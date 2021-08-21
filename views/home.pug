@@ -14,3 +14,12 @@ block content
     div.w-75.d-flex.flex-wrap 
       each movie in movies
         +card(movie.slug,movie.name.toUpperCase(),movie.summery)
+
+  div.d-flex.justify-content-center.mt-5
+    div.w-25.d-flex.justify-content-around
+      button.btn.btn-primary#be-btn before
+      button.btn.btn-primary #{page}
+      button.btn.btn-primary#af-btn next
+
+  script(src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous")
+  script(src='js/home.js')

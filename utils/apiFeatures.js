@@ -41,12 +41,10 @@ class ApiFeatures {
   }
 
   paginate() {
-    const limit = this._queryStr.limit * 1;
-    const page = this._queryStr.page * 1;
-    if (page && limit) {
+    const limit = this._queryStr.limit * 1 || 6;
+    const page = this._queryStr.page * 1 || 1;
+    if (page || limit) {
       this._query = this._query.skip((page - 1) * limit).limit(limit);
-    } else {
-      this._query = this._query.skip(0).limit(6);
     }
     return this;
   }
