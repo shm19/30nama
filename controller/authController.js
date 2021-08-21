@@ -32,12 +32,12 @@ const createAndSendJWT = (user, res) => {
   });
 };
 
-module.exports.signUp = catchAsync(async (req, res) => {
+exports.signUp = catchAsync(async (req, res) => {
   const user = await User.create(req.body);
   createAndSendJWT(user, res);
 });
 
-module.exports.login = catchAsync(async (req, res, next) => {
+exports.login = catchAsync(async (req, res, next) => {
   const { email } = req.body;
   const { password } = req.body;
 
@@ -51,7 +51,7 @@ module.exports.login = catchAsync(async (req, res, next) => {
   createAndSendJWT(user, res);
 });
 
-module.exports.protect = catchAsync(async (req, res, next) => {
+exports.protect = catchAsync(async (req, res, next) => {
   if (!req.headers.authorization) {
     return next(new AppError('You are not logged In', 401));
   }
@@ -75,7 +75,19 @@ module.exports.protect = catchAsync(async (req, res, next) => {
   return next();
 });
 
-module.exports.isLoggedIn = async (req, res, next) => {
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    // roles ['admin', 'user']
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError('You do not have permission to perform this action', 403)
+      );
+    }
+    next();
+  };
+};
+
+exports.isLoggedIn = async (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     if (!token) return next();
@@ -89,7 +101,7 @@ module.exports.isLoggedIn = async (req, res, next) => {
   return next();
 };
 
-module.exports.logout = catchAsync(async (req, res, next) => {
+exports.logout = catchAsync(async (req, res, next) => {
   res.cookie('jwt', 'loggedout', {
     expiresIn: Date.now() + 1000,
     usehttp: true,
@@ -98,7 +110,7 @@ module.exports.logout = catchAsync(async (req, res, next) => {
   setTimeout(() => res.redirect('/'), 500);
 });
 
-module.exports.updatePassword = catchAsync(async (req, res, next) => {
+exports.updatePassword = catchAsync(async (req, res, next) => {
   // Or we can get user from token by using protect middleware which is better i guess
   const user = await User.findById(req.params.id).select('+password');
   if (!user) {
@@ -117,7 +129,7 @@ module.exports.updatePassword = catchAsync(async (req, res, next) => {
  * This function will sned resetToken created by crypto package by nodemailer to user email
  * and then save hashed resetToken into db and wait for resetPassword request by token
  */
-module.exports.forgotPassword = async (req, res, next) => {
+exports.forgotPassword = async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
   try {
     if (!user) {
@@ -150,7 +162,7 @@ module.exports.forgotPassword = async (req, res, next) => {
 };
 
 // This function comes after forgot password and reset password by reset token
-module.exports.resetPassword = catchAsync(async (req, res, next) => {
+exports.resetPassword = catchAsync(async (req, res, next) => {
   const hashedToken = crypto
     .createHash('sha256')
     .update(req.params.passwordResetToken)
@@ -170,13 +182,4 @@ module.exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordResetExpiresAt = undefined;
   await user.save();
   createAndSendJWT(user, res);
-});
-
-module.exports.getMe = catchAsync(async (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    data: {
-      user: req.user
-    }
-  });
 });
