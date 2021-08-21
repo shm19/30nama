@@ -11,7 +11,7 @@ const actorSchema = new mongoose.Schema(
     photo: String,
     birthDay: Date,
     awards: [String],
-    description: String,
+    about: String,
     movies: [
       {
         type: mongoose.Schema.Types.ObjectId,

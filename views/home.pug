@@ -1,0 +1,16 @@
+extends base
+
+mixin card(imgSrc,cardTitle,text)
+  div.card.col-4.p-1
+    img.card-img-top(src=`img/movies/${imgSrc}.jpeg` alt=imgSrc)
+    div.card-body
+      h5.card-title= cardTitle
+      p.card-text= text
+      a.btn.btn-primary(href='#') more info
+
+block content
+
+  div.d-flex.justify-content-center.mt-4
+    div.w-75.d-flex.flex-wrap 
+      each movie in movies
+        +card(movie.slug,movie.name.toUpperCase(),movie.summery)

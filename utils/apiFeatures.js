@@ -34,8 +34,9 @@ class ApiFeatures {
     if (this._queryStr.fields) {
       const selectedFields = this._queryStr.fields.split(',').join(' ');
       this._query.select(selectedFields);
+    } else {
+      this._query.select('-__v');
     }
-    this._query.select('-__v');
     return this;
   }
 
@@ -45,7 +46,7 @@ class ApiFeatures {
     if (page && limit) {
       this._query = this._query.skip((page - 1) * limit).limit(limit);
     } else {
-      this._query = this._query.skip(0).limit(10);
+      this._query = this._query.skip(0).limit(6);
     }
     return this;
   }

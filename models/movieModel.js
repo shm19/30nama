@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 const movieSchema = new mongoose.Schema(
   {
@@ -9,6 +10,7 @@ const movieSchema = new mongoose.Schema(
       maxLength: [30, 'Name length should be less then this'],
       require: [true, 'Movie should have a name']
     },
+    slug: String,
     productionYear: {
       type: Number,
       min: [1900, 'mimiumn production year is 1900'],
@@ -56,6 +58,11 @@ movieSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'movie',
   localField: '_id'
+});
+
+movieSchema.pre('save', function(next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
 });
 
 movieSchema.pre(/findOne/, function(next) {
