@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  margin: 0;
+  background: black;
+  font-family: 'Montserrat', helvetica, arial, sans-serif;
+  font-size: 14px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.movie_card {
+  width: 70%;
+  height: 60%;
+  border-radius: 2%;
+  position: relative;
+  overflow: hidden;
+  transition: all 1s;
+  box-shadow: 0px 0px 150px -45px rgba(33, 37, 37, 0.6);
+  cursor: pointer;
+}
+.movie_card:hover {
+  transform: scale(1.075);
+  box-shadow: 0px 0px 120px -55px rgba(197, 24, 24, 0.6);
+}
+
+.info_section {
+  height: 100%;
+  border-radius: 2%;
+}
+
+.movie_header {
+  display: flex;
+  padding: 2%;
+  height: 70%;
+}
+
+.movie-info {
+  width: 70%;
+}
+
+.movie-info p,
+.movie-info h1,
+.movie-info h4 {
+  padding: 5px;
+}
+.movie-info p {
+  color: rgba(255, 255, 255, 0.719);
+}
+
+.movie-info h1,
+.movie-info h4 {
+  color: #9ac7fa;
+}
+
+.info_section .locandina {
+  margin-right: 20px;
+  height: 100%;
+  box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.5);
+}
+
+.movie_card .info_section {
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.3s;
+  transition-delay: 0.15s;
+  margin: 0 10px;
+}
+
+.movie_card .info_section {
+  transition: color 0.3s;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.star-rating {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+.star-rating div {
+  width: 50%;
+  margin-top: 2px;
+}
+.star-rating i {
+  color: #9ac7fa;
+}
+
+.blur_back {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  border-radius: 2%;
+}
+
+@media screen and (min-width: 768px) {
+  .movie_header {
+    width: 55%;
+  }
+
+  .info_section {
+    background: linear-gradient(to right, #0d0d0c 50%, transparent 100%);
+  }
+  .blur_back {
+    width: 50%;
+    background-position: 50% 20% !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .movie_card {
+    width: 95%;
+    margin: 70px auto;
+    min-height: 350px;
+    height: auto;
+  }
+  .blur_back {
+    width: 100%;
+    background-position: 50% 50% !important;
+  }
+  .movie_header {
+    width: 100%;
+    margin-top: 85px;
+  }
+
+  .info_section {
+    background: linear-gradient(to top, #141413 50%, transparent 100%);
+    display: inline-grid;
+  }
+}
+
+.movie_bg {
+  background: url('https://fsmedia.imgix.net/cd/c9/5e/ba/4817/4d9a/93f0/c776ec32ecbc/lara-crofts-neck-looks-unnatural-in-the-new-poster-for-tomb-raider.png');
+}

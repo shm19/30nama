@@ -1,0 +1,31 @@
+extends base 
+
+block headExt
+  link(rel='stylesheet' href='/css/movie.css')
+
+block content
+  .card-container
+    #tomb.movie_card
+      .info_section
+        .movie_header
+          img.locandina(src=`/img/movies/${movie.slug}.jpeg` alt=movie.slug)
+          .movie-info
+            h1= movie.name
+            h4= `${movie.productionYear}, ${movie.director}`
+            p 125 min
+            p Action, Fantasy
+            p=`imdb: ${movie.imdbScore}` 
+            .star-rating
+              p 30nama Rate
+              div
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.far.fa-star
+                i.far.fa-star
+            -casts = movie.stars.map(el => el.name).join(", ")
+            p=`Casts: ${casts}` 
+            p= movie.description || movie.summery
+      .blur_back(style=`background: url(/img/movies/${movie.slug}-bg.jpeg) no-repeat center/cover;`)
+
+  script(src='https://kit.fontawesome.com/8bf0030466.js' crossorigin='anonymous')

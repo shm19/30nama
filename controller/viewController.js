@@ -17,5 +17,6 @@ exports.home = catchAsync(async (req, res) => {
 
 exports.getMovie = catchAsync(async (req, res) => {
   const movie = await movieModel.findOne({ slug: req.params.slug });
-  res.status(200).json({ status: 'sucess', data: { movie } });
+  // res.status(200).json({ status: 'sucess', data: { movie } });
+  res.render('movie.pug', { movie });
 });
