@@ -60,6 +60,7 @@ movieSchema.virtual('reviews', {
   localField: '_id'
 });
 
+movieSchema.index({ slug: 1 });
 movieSchema.pre('save', function(next) {
   this.slug = slugify(this.name, { lower: true });
   next();

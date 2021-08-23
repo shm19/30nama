@@ -1,6 +1,7 @@
 /* eslint-disable */
 const beforeButton = $('#be-btn')[0];
 const afterButton = $('#af-btn')[0];
+const titles = $('.title');
 
 $(beforeButton).on('click', () => {
   const searchParams = new URLSearchParams(window.location.search);
@@ -18,4 +19,9 @@ $(afterButton).on('click', () => {
     searchParams.set('page', searchParams.get('page') * 1 + 1);
   }
   window.location.search = searchParams.toString();
+});
+
+titles.on('click', function() {
+  console.log(this.slug);
+  window.location.assign(`/movies/${this.id}`);
 });

@@ -15,4 +15,5 @@ router.get('/home', viewController.home);
 router.get('/login', viewController.login);
 router.get('/logout', authController.logout);
 
+router.get('/movies/:slug', viewController.getMovie);
 module.exports = router;
