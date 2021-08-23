@@ -46,6 +46,21 @@ const movieSchema = new mongoose.Schema(
       type: Number,
       defualt: 0
     },
+    genres: [
+      {
+        type: String,
+        required: [true, 'Movie geners should be defined']
+      }
+    ],
+    time: {
+      type: String,
+      validate: {
+        validator: function(value) {
+          return value.match(/^\dhour-\d\dmin$/);
+        }
+      },
+      message: 'Time should be formated as hour-min'
+    },
     link: String
   },
   {

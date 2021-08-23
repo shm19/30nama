@@ -12,8 +12,10 @@ block content
           .movie-info
             h1= movie.name
             h4= `${movie.productionYear}, ${movie.director}`
-            p 125 min
-            p Action, Fantasy
+            - const hour = movie.time.split('-')[0];
+            - const min = movie.time.split('-')[1];
+            p= `${hour} ${min}`
+            p= movie.genres.join(", ")
             p=`imdb: ${movie.imdbScore}` 
             .star-rating
               p 30nama Rate
@@ -25,7 +27,7 @@ block content
                 i.far.fa-star
             -casts = movie.stars.map(el => el.name).join(", ")
             p=`Casts: ${casts}` 
-            p= movie.description || movie.summery
+            p= movie.summery
       .blur_back(style=`background: url(/img/movies/${movie.slug}-bg.jpeg) no-repeat center/cover;`)
 
   script(src='https://kit.fontawesome.com/8bf0030466.js' crossorigin='anonymous')
