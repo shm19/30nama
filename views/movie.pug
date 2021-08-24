@@ -1,5 +1,23 @@
 extends base 
 
+mixin reviewCard(slug,name,text,email,date)
+  .reviews__card
+    .reviews__avatar
+      img.reviews__avatar-img(src='/img/girl.jpeg' alt='Cristian Vega')
+      h6.reviews__user Cristian Vega
+    p.reviews__text
+      | Sem feugiat sed lorem vel dignissim platea habitasse dolor suscipit ultricies dapibus
+      | Sem feugiat sed lorem vel dignissim platea habitasse dolor suscipit ultricies dapibus
+
+    .rating
+      i.fas.fa-star
+      i.fas.fa-star
+      i.fas.fa-star
+      i.far.fa-star
+      i.far.fa-star
+    .review-info
+      h3 jackSmith.io
+      h3 1/1/2021
 block headExt
   link(rel='stylesheet' href='/css/movie.css')
 
@@ -30,4 +48,15 @@ block content
             p= movie.summery
       .blur_back(style=`background: url(/img/movies/${movie.slug}-bg.jpeg) no-repeat center/cover;`)
 
+  .carousel-container
+    button#prevBtn
+      i.fas.fa-chevron-left
+    button#nextBtn
+      i.fas.fa-chevron-right
+    .carousel-slide
+      +reviewCard()
+      +reviewCard()
+      +reviewCard()
+
+  script(src='/js/movie.js')
   script(src='https://kit.fontawesome.com/8bf0030466.js' crossorigin='anonymous')
