@@ -216,6 +216,8 @@ Append from here
   -ms-flex-align: center;
   align-items: center;
   margin-bottom: 2rem;
+  width: 40%;
+  justify-content: space-around;
 }
 .reviews__avatar-img {
   height: 8rem;

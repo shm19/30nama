@@ -2,12 +2,14 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+const slugify = require('slugify');
 
 const schemaOption = require('../utils/schemaOptoin');
 
 const userSchema = new mongoose.Schema(
   {
     name: schemaOption.nameObj('User'),
+    slug: String,
     email: {
       type: 'string',
       required: [true, 'user should have an email'],
@@ -19,6 +21,12 @@ const userSchema = new mongoose.Schema(
       default: 'user',
       enum: ['user', 'admin'],
       message: `Role should be one of these user or admin`
+    },
+    gender: {
+      type: String,
+      required: [true, 'user should have a gender'],
+      enum: ['male', 'female'],
+      message: 'Gender should either male or female'
     },
     password: {
       type: 'string',
@@ -40,7 +48,7 @@ const userSchema = new mongoose.Schema(
     passwordResetToken: String,
     passwordResetExpiresAt: Date,
     active: {
-      type: 'boolean',
+      type: Boolean,
       default: false,
       select: false
     }
@@ -50,6 +58,11 @@ const userSchema = new mongoose.Schema(
     toObject: { virtuals: true }
   }
 );
+
+userSchema.pre('save', function(next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
+});
 
 userSchema.pre('save', async function(next) {
   if (this.isModified('password')) {

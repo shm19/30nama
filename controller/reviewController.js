@@ -17,7 +17,10 @@ module.exports.setUserId = (req, res, next) => {
   next();
 };
 
-module.exports.getAllReviews = handleFactory.getAll(reviewModel);
+module.exports.getAllReviews = handleFactory.getAll(reviewModel, {
+  path: 'user',
+  select: 'name email gender slug'
+});
 
 module.exports.getReview = handleFactory.getOne(reviewModel);
 

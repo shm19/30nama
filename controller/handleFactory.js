@@ -58,14 +58,15 @@ module.exports.createOne = Model =>
   });
 
 // Filter , Sort , paginate , limit Fields
-module.exports.getAll = Model =>
+module.exports.getAll = (Model, populateOption) =>
   catchAsync(async (req, res, next) => {
     const filter = req.filter || {};
     const docs = await new ApiFeatures(Model.find(filter), req.query)
       .filter()
       .sort()
       .limitFields()
-      .paginate().query;
+      .paginate()
+      .query.populate(populateOption || '');
     res.status(200).json({
       status: 'success',
       results: docs.length,

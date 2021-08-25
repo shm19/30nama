@@ -1,6 +1,7 @@
 const catchAsync = require('../utils/catchAsync');
 const ApiFeatures = require('../utils/apiFeatures');
 const movieModel = require('../models/movieModel');
+const reviewModel = require('../models/reviewModel');
 
 exports.login = (req, res) => {
   res.status(200).render('login.pug', { title: 'Login' });
@@ -17,5 +18,9 @@ exports.home = catchAsync(async (req, res) => {
 
 exports.getMovie = catchAsync(async (req, res) => {
   const movie = await movieModel.findOne({ slug: req.params.slug });
-  res.render('movie.pug', { movie });
+  const reviews = await reviewModel.find({ movie: movie.id }).populate({
+    path: 'user',
+    select: 'name email gender slug'
+  });
+  res.render('movie.pug', { movie, reviews });
 });
