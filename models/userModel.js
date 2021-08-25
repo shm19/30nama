@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema(
       select: false,
       required: [true, 'user should have a password']
     },
+    photo: String,
     passwordConfirm: {
       type: 'string',
       required: [true, 'confirm your password'],
@@ -49,7 +50,7 @@ const userSchema = new mongoose.Schema(
     passwordResetExpiresAt: Date,
     active: {
       type: Boolean,
-      default: false,
+      default: true,
       select: false
     }
   },

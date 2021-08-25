@@ -20,7 +20,7 @@ exports.getMovie = catchAsync(async (req, res) => {
   const movie = await movieModel.findOne({ slug: req.params.slug });
   const reviews = await reviewModel.find({ movie: movie.id }).populate({
     path: 'user',
-    select: 'name email gender slug'
+    select: 'name email gender slug photo'
   });
   res.render('movie.pug', { movie, reviews });
 });
