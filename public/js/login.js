@@ -19,7 +19,7 @@ $(loginBtn).on('click', function() {
     .done(function(response) {
       console.log(response);
       window.setTimeout(() => {
-        location.assign('/');
+        location.assign('/home');
       }, 1000);
     })
     .fail(function(jqXHR, textStatus, errorTh) {

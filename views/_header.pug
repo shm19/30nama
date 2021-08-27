@@ -14,9 +14,13 @@ nav.navbar.navbar-expand-lg.navbar-dark
         +liNavItem('Login','/login')
       else
         +liNavItem(`Logout`,'/logout')
-        +liNavItem(`${user.name} Is LoggedIn`,'/me')
+    if user
+      div.d-flex
+        a(href="/me")
+          img.form__user-photo(src=`/img/users/${user.photo}`, alt="User Photo") 
+        h1.m-auto= user.name
 
     div.w-25
       form.d-flex
-        input.form-control.me-2.w-50.mx-3(type="search" placeholder="Search" aria-label="Search")
-        button.btn.btn-light(type='submit') Search
+        input.nav-form-input(type="search" placeholder="Search" aria-label="Search")
+        button.nav-search-btn.my-btn--small.my-btn--red(type='submit') Search

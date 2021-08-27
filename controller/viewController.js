@@ -24,3 +24,7 @@ exports.getMovie = catchAsync(async (req, res) => {
   });
   res.render('movie.pug', { movie, reviews });
 });
+
+exports.getMe = catchAsync(async (req, res) => {
+  res.render('account.pug');
+});

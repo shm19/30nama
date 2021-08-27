@@ -1,0 +1,762 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.6;
+  font-weight: 300;
+  padding: 3rem;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #333;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-item a {
+  font-size: 1.5rem;
+}
+
+.nav-form-input {
+  display: block;
+  font-family: inherit;
+  font-size: 1.5rem;
+  padding: 1.25rem 1.75rem;
+  border: none;
+  width: 100%;
+  background-color: lightgray;
+  color: black;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.nav-search-btn {
+  font-size: 1.6rem;
+  padding: 1.4rem 3rem;
+  text-transform: uppercase;
+  display: inline-block;
+  text-decoration: none;
+  position: relative;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  font-weight: 400;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+.line {
+  margin: 6rem 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e0e0e0;
+}
+
+.main {
+  padding: 8rem 6rem;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: relative;
+}
+
+.user-view {
+  background-color: rgb(80, 78, 78);
+  max-width: 120rem;
+  margin: 0 auto;
+  min-height: 100vh;
+  border-radius: 3px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(197, 24, 24, 0.3);
+  box-shadow: 0 2.5rem 8rem 2rem rgba(197, 24, 24, 0.3);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.user-view__menu {
+  -webkit-box-flex: 32rem;
+  -ms-flex: 32rem 0 0px;
+  flex: 32rem 0 0;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    #0c030383,
+    rgba(255, 0, 0, 0.281)
+  );
+  background-image: linear-gradient(
+    to right bottom,
+    #0c030383,
+    rgba(255, 0, 0, 0.281)
+  );
+  padding: 4rem 0;
+}
+
+.side-nav {
+  list-style: none;
+}
+.side-nav li {
+  margin: 1rem 0;
+  border-left: 0 solid rgba(255, 255, 255, 0.7);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.side-nav--active,
+.side-nav li:hover {
+  border-left: 4px solid rgba(255, 255, 255, 0.7) !important;
+}
+.side-nav--active a {
+  -webkit-transform: translateX(-3px);
+  transform: translateX(-3px);
+}
+.side-nav a:link,
+.side-nav a:visited {
+  padding: 1rem 4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  text-decoration: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.side-nav a:hover,
+.side-nav a:active {
+  -webkit-transform: translateX(3px);
+  transform: translateX(3px);
+}
+
+.admin-nav {
+  margin-top: 5.5rem;
+}
+.admin-nav__heading {
+  margin: 0 5rem 1.5rem 4rem;
+  padding-bottom: 3px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid currentColor;
+}
+
+.user-view__content {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 7rem 0;
+}
+.user-view__form-container {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 8rem;
+}
+
+.heading-secondary {
+  font-size: 2.25rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(rgba(255, 0, 0, 0.412)),
+    to(black)
+  );
+  background-image: linear-gradient(to right, rgba(255, 0, 0, 0.412), black);
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: 0.1rem;
+  line-height: 1.3;
+  display: inline-block;
+}
+
+.ma-bt-md {
+  margin-bottom: 3rem !important;
+}
+
+.form__input {
+  display: block;
+  font-family: inherit;
+  font-size: 1.5rem;
+  color: inherit;
+  padding: 1.25rem 1.75rem;
+  border: none;
+  width: 100%;
+  background-color: lightgray;
+  color: black;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* Pseudo element (a visible thing that isn't really in the DOM).
+      Also needs -ms- */
+}
+
+.form__input:focus {
+  outline: none;
+  border-bottom: 3px solid #55c57a;
+}
+.form__input:focus:invalid {
+  border-bottom: 3px solid #ff7730;
+}
+
+.form__group:not(:last-child) {
+  margin-bottom: 2.5rem;
+}
+
+.form__label {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.form__photo-upload {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 1.6rem;
+}
+
+.form__user-photo {
+  height: 7.5rem;
+  width: 7.5rem;
+  border-radius: 50%;
+  margin-right: 2rem;
+}
+
+.form__upload {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.form__upload + label {
+  color: lightgray;
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px solid white;
+  padding: 3px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  cursor: pointer;
+  border-radius: 5%;
+}
+
+.form__upload + label:hover {
+  color: black;
+  -webkit-box-shadow: 0 1rem 2rem rgba(204, 44, 44, 0.3);
+  box-shadow: 0 1rem 2rem rgba(204, 44, 44, 0.3);
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.my-btn,
+.my-btn:link,
+.my-btn:visited {
+  font-size: 1.6rem;
+  padding: 1.4rem 3rem;
+  border-radius: 10rem;
+  text-transform: uppercase;
+  display: inline-block;
+  text-decoration: none;
+  position: relative;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  font-weight: 400;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  /*Add later when we use this for the button in form*/
+  border: none;
+  cursor: pointer;
+}
+
+.my-btn:hover {
+  -webkit-transform: translateY(-3px);
+  transform: translateY(-3px);
+  -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.my-btn:active {
+  -webkit-transform: translateY(-1px);
+  transform: translateY(-1px);
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.my-btn--red {
+  background-color: rgba(255, 0, 0, 0.363);
+  color: lightgray;
+}
+
+.my-btn--small {
+  padding: 1.25rem 3rem !important;
+  font-size: 1.4rem !important;
+}
+
+/* 
+  movie.pug
+*/
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.movie_card {
+  width: 70%;
+  height: 60%;
+  border-radius: 2%;
+  position: relative;
+  overflow: hidden;
+  transition: all 1s;
+  box-shadow: 0px 0px 150px -45px rgba(33, 37, 37, 0.6);
+  cursor: pointer;
+}
+.movie_card:hover {
+  transform: scale(1.075);
+  box-shadow: 0px 0px 120px -55px rgba(197, 24, 24, 0.6);
+}
+
+.info_section {
+  height: 100%;
+  border-radius: 2%;
+}
+
+.movie_header {
+  display: flex;
+  padding: 2%;
+  height: 70%;
+}
+
+.movie-info {
+  width: 70%;
+}
+
+.movie-info p,
+.movie-info h1,
+.movie-info h4 {
+  padding: 5px;
+}
+.movie-info p {
+  color: rgba(255, 255, 255, 0.719);
+  font-size: 14px;
+}
+
+.movie-info h1,
+.movie-info h4 {
+  color: #9ac7fa;
+}
+
+.info_section .locandina {
+  margin-right: 20px;
+  height: 100%;
+  box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.5);
+}
+
+.movie_card .info_section {
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.3s;
+  transition-delay: 0.15s;
+  margin: 0 10px;
+}
+
+.movie_card .info_section {
+  transition: color 0.3s;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.star-rating {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+.star-rating div {
+  width: 50%;
+  margin-top: 2px;
+}
+.star-rating i {
+  color: #9ac7fa;
+}
+
+.blur_back {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  border-radius: 2%;
+}
+
+@media screen and (min-width: 768px) {
+  .movie_header {
+    width: 55%;
+  }
+
+  .info_section {
+    background: linear-gradient(to right, #0d0d0c 50%, transparent 100%);
+  }
+  .blur_back {
+    width: 50%;
+    background-position: 50% 20% !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .movie_card {
+    width: 95%;
+    margin: 70px auto;
+    min-height: 350px;
+    height: auto;
+  }
+  .blur_back {
+    width: 100%;
+    background-position: 50% 50% !important;
+  }
+  .movie_header {
+    width: 100%;
+    margin-top: 85px;
+  }
+
+  .info_section {
+    background: linear-gradient(to top, #141413 50%, transparent 100%);
+    display: inline-grid;
+  }
+}
+
+/* .movie_bg {
+  background: url('https://fsmedia.imgix.net/cd/c9/5e/ba/4817/4d9a/93f0/c776ec32ecbc/lara-crofts-neck-looks-unnatural-in-the-new-poster-for-tomb-raider.png');
+} */
+
+/* 
+Append from here
+ */
+
+.carousel-container {
+  width: 50%;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 200px;
+}
+
+.carousel-slide {
+  height: 500px;
+  margin-top: 10%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.carousel-slide > div {
+  width: 100%;
+  height: 100%;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10% 0;
+}
+
+.carousel-container button {
+  position: absolute;
+  top: 45%;
+  font-size: 30px;
+  color: rgba(255, 255, 255, 0.76);
+  z-index: 5;
+  border: none;
+  background-color: transparent;
+  opacity: 0.4;
+}
+
+#prevBtn {
+  left: 5%;
+}
+
+#nextBtn {
+  right: 5%;
+}
+
+.reviews__card {
+  background: linear-gradient(to top, #141413 50%, transparent 100%);
+  box-shadow: 0px 0px 150px -45px rgba(33, 37, 37, 0.6);
+  scroll-snap-align: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-box-align: center;
+  color: lightgray;
+  border-radius: 2%;
+  font-size: 14px;
+}
+
+.reviews__card:hover {
+  transform: scale(1.075);
+  cursor: pointer;
+  transition: all 1s;
+  box-shadow: 0px 0px 120px -55px rgba(197, 24, 24, 0.6);
+}
+
+.reviews__avatar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  width: 30%;
+  justify-content: space-around;
+}
+.reviews__avatar-img {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  margin-right: 1.5rem;
+}
+.reviews__user {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.reviews__text {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+  font-weight: 400;
+  padding: 0 15%;
+}
+
+.rating {
+  width: 15%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+}
+.rating i {
+  color: lightcoral;
+}
+.review-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.card {
+  height: 600px;
+  position: relative;
+  border-radius: 5%;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+}
+.card:hover {
+  transition: 0.5s;
+}
+.card:hover .title {
+  padding-bottom: 50px;
+  opacity: 1;
+  transition: 0.5s;
+}
+.card .title {
+  color: white;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  font-size: 30px;
+  font-weight: 300;
+  padding: 30px 0;
+  background: linear-gradient(to top, #000, transparent);
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.title:hover {
+  cursor: pointer;
+}
+
+.login-form {
+  border-radius: 5%;
+  font-size: 14px;
+}
+
+.login-form input {
+  cursor: pointer;
+}
+
+.login-form:hover {
+  box-shadow: 0px 0px 120px -55px rgba(197, 24, 24, 0.6);
+}
+
+.login-card {
+  margin-bottom: 20px;
+  border: none;
+}
+
+.box {
+  width: 500px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: #191919;
+  text-align: center;
+  transition: 0.25s;
+  margin-top: 100px;
+}
+
+.box input[type='text'],
+.box input[type='password'] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 10px 10px;
+  width: 250px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+.box h1 {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.box input[type='text']:focus,
+.box input[type='password']:focus {
+  width: 300px;
+  border-color: #2ecc71;
+}
+
+.box input[type='submit'] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.box input[type='submit']:hover {
+  background: #2ecc71;
+}
+
+.forgot {
+  text-decoration: underline;
+}
+
+ul.social-network {
+  list-style: none;
+  display: inline;
+  margin-left: 0 !important;
+  padding: 0;
+}
+
+ul.social-network li {
+  display: inline;
+  margin: 0 5px;
+}
+
+.social-network a.icoFacebook:hover {
+  background-color: #3b5998;
+}
+
+.social-network a.icoTwitter:hover {
+  background-color: #33ccff;
+}
+
+.social-network a.icoGoogle:hover {
+  background-color: #bd3518;
+}
+
+.social-network a.icoFacebook:hover i,
+.social-network a.icoTwitter:hover i,
+.social-network a.icoGoogle:hover i {
+  color: #fff;
+}
+
+a.socialIcon:hover,
+.socialHoverClass {
+  color: #44bcdd;
+}
+
+.social-circle li a {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto 0 auto;
+  border-radius: 50%;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.social-circle li i {
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+}
+
+.social-circle li a:hover i,
+.triggeredHover {
+  transform: rotate(360deg);
+  transition: all 0.2s;
+}
+
+.social-circle i {
+  color: #fff;
+  transition: all 0.8s;
+  transition: all 0.8s;
+}

@@ -1,9 +1,26 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
+html {
+  font-size: 62.5%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 body {
+  line-height: 1.6;
+  font-weight: 300;
+  padding: 3rem;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
   font-family: 'Open Sans', sans-serif;
   background-color: #333;
   color: rgba(255, 255, 255, 0.7);
 }
+
 .card {
   height: 600px;
   position: relative;

@@ -8,7 +8,7 @@ mixin card(imgSrc,cardTitle,text)
       p.card-text= text
       a.btn.btn-primary(href='#') more info
 block headExt
-  link(rel="stylesheet" href="/css/home.css")
+  link(rel="stylesheet" href="/css/style.css")
 
 block content
 
@@ -21,9 +21,9 @@ block content
 
   div.d-flex.justify-content-center.mt-5
     div.w-25.d-flex.justify-content-around
-      button.btn.btn-primary#be-btn before
-      button.btn.btn-primary #{page}
-      button.btn.btn-primary#af-btn next
+      button.my-btn.my-btn--red#be-btn before
+      button.my-btn.my-btn--red #{page}
+      button.my-btn.my-btn--red#af-btn next
 
   script(src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous")
   script(src='js/home.js')

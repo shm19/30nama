@@ -1,13 +1,13 @@
 extends base
 
 block headExt
-  link(rel="stylesheet" href="/css/login.css")
+  link(rel="stylesheet" href="/css/style.css")
 block content
   div.container
     div.row
       div.col-md-6
-        div.card
-          form.box
+        div.login-card
+          form.login-form.box
             h1 Login
             p.text-muted Please enter your login and password
             input(type="text" placeholder="Username" id="username")
@@ -15,7 +15,7 @@ block content
             a.forgot.text-muted(href='#') Forgot password
             input(type="submit" value="Login" href="#" id="login-btn")
             div.col-md-12
-              ul.social-networl.social-circle.d-flex.justify-content-around
+              ul.social-network.social-circle.d-flex.justify-content-around
                 li
                   a(href="#" class="icoFacebook" title="Facebook")
                     i.fab.fa-facebook-f
