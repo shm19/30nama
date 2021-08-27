@@ -19,8 +19,6 @@ mixin reviewCard(review)
     .review-info
       h3= review.user.email
       h3= new Date(review.createdAt).toDateString()
-block headExt
-  link(rel='stylesheet' href='/css/style.css')
 
 block content
   .card-container

@@ -107,7 +107,7 @@ exports.logout = catchAsync(async (req, res, next) => {
     usehttp: true,
     secure: true
   });
-  setTimeout(() => res.redirect('/'), 500);
+  setTimeout(() => res.redirect('/home'), 500);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
