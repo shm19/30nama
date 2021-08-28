@@ -1,7 +1,13 @@
 /* eslint-disable */
 
-const signup = document.querySelectorAll('ul.navbar-nav a')[2];
-const login = document.querySelectorAll('ul.navbar-nav a')[3];
+// const searchBtn = document.querySelector('#search-form button');
+const searchInput = $('#search-form input');
 
-// signup.addEventListener('click', () => {});
-login.addEventListener('click', () => {});
+const searchBtn = $('#search-form button');
+
+$(searchBtn).on('click', () => {
+  console.log($(searchInput).val());
+  const searchParams = new URLSearchParams(window.location.search);
+  searchParams.set('movieSlug', searchInput.val());
+  window.location.assign(`/home?${searchParams.toString()}`);
+});

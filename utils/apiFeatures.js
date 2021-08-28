@@ -1,3 +1,5 @@
+const slugify = require('slugify');
+
 class ApiFeatures {
   constructor(query, queryStr) {
     this._query = query;
@@ -9,13 +11,25 @@ class ApiFeatures {
     // remvoe fields from query str []
     let filterQuery = { ...this._queryStr };
     excludedFields.forEach(el => delete filterQuery[el]);
+
+    Object.keys(filterQuery).forEach(key => {
+      if (key === 'movieSlug') {
+        filterQuery[key] = slugify(filterQuery[key], { lower: true });
+      }
+    });
+
     filterQuery = JSON.parse(
       JSON.stringify(filterQuery).replace(
         /\b(gte|lte|lt|gt)\b/g,
         match => `$${match}`
       )
     );
-    this._query = this._query.find(filterQuery);
+    if (filterQuery.movieSlug) {
+      const pattern = `(^.*?(${filterQuery.movieSlug})[^$]*$)`;
+      this._query = this._query.find({ slug: { $regex: pattern } });
+    } else {
+      this._query = this._query.find(filterQuery);
+    }
     return this;
   }
 
