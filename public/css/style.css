@@ -74,6 +74,10 @@ body {
   background-color: #e0e0e0;
 }
 
+.h-600 {
+  height: 600px;
+}
+
 .main {
   padding: 8rem 6rem;
   -webkit-box-flex: 1;

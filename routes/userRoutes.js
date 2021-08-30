@@ -16,7 +16,7 @@ router.patch(
 
 router.use(authController.protect);
 
-router.post('/updatepassword/:id', authController.updatePassword);
+router.patch('/updateMyPassword', authController.updateMyPassword);
 router.get('/me', userController.getMe, userController.getUser);
 
 router.patch(

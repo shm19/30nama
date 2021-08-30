@@ -42,7 +42,7 @@ exports.login = catchAsync(async (req, res, next) => {
   const { password } = req.body;
 
   if (!email || !password) {
-    return next(new AppError('Please provide email and password'));
+    return next(new AppError('Please provide email and password'), 401);
   }
   const user = await User.findOne({ email }).select('+password');
   if (!user || !(await user.comparePassword(password, user.password))) {
@@ -52,10 +52,10 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
-  if (!req.headers.authorization) {
+  if (!req.headers.authorization && !req.cookies.jwt) {
     return next(new AppError('You are not logged In', 401));
   }
-  const token = req.headers.authorization.split(' ')[1];
+  const token = req.cookies.jwt || req.headers.authorization.split(' ')[1];
   if (!token) {
     return next(new AppError('You are not logged In', 401));
   }
@@ -95,6 +95,7 @@ exports.isLoggedIn = async (req, res, next) => {
     const user = await User.findById(decode.id);
     if (!user) return next();
     res.locals.user = user;
+    req.user = user;
   } catch (err) {
     return next();
   }
@@ -110,12 +111,9 @@ exports.logout = catchAsync(async (req, res, next) => {
   setTimeout(() => res.redirect('/home'), 500);
 });
 
-exports.updatePassword = catchAsync(async (req, res, next) => {
+exports.updateMyPassword = catchAsync(async (req, res, next) => {
   // Or we can get user from token by using protect middleware which is better i guess
-  const user = await User.findById(req.params.id).select('+password');
-  if (!user) {
-    return next(new AppError(`can't find any user with this Id`, 400));
-  }
+  const user = await User.findById(req.user.id).select('+password');
   if (!(await user.comparePassword(req.body.currentPassword, user.password))) {
     return next(new AppError(`Wrong password`, 401));
   }

@@ -28,8 +28,3 @@ exports.getMovie = catchAsync(async (req, res) => {
 exports.getMe = catchAsync(async (req, res) => {
   res.render('account.pug');
 });
-
-exports.search = catchAsync(async (req, res, next) => {
-  console.log(req.body);
-  return next();
-});

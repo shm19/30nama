@@ -12,10 +12,13 @@ block content
 
   div.d-flex.justify-content-center.mt-4
     div.w-75.d-flex.flex-wrap 
-      each movie in movies
-        .col-3.p-2
-          .card(style=`background: url('/img/movies/${movie.slug}.jpeg') no-repeat center/cover;`)
-            .title(id=`${movie.slug}`)= movie.name
+      each i in [0,1,2,3,4,5,6,7]
+        if movies[i]
+          .col-3.p-2
+            .card(style=`background: url('/img/movies/${movies[i].slug}.jpeg') no-repeat center/cover;`)
+              .title(id=`${movies[i].slug}`)= movies[i].name
+        else
+          .col-3.h-600
 
   div.d-flex.justify-content-center.mt-5
     div.w-25.d-flex.justify-content-around
