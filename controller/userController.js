@@ -76,15 +76,11 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
   if (req.file) updateObj.photo = req.file.filename;
 
-  const newUser = await userModel.findByIdAndUpdate(
-    req.user.id,
-    updateObj,
-    {
-      new: true,
-      runValidators: true
-    }
-    // () => next(new AppError('Invalid email or password'), 401)
-  );
+  const newUser = await userModel.findByIdAndUpdate(req.user.id, updateObj, {
+    new: true,
+    runValidators: true
+  });
+
   res.status(200).json({
     status: 'success',
     data: {
