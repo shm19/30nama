@@ -17,7 +17,10 @@ nav.navbar.navbar-expand-lg.navbar-dark
     if user
       div.d-flex
         a(href="/me")
-          img.form__user-photo(src=`/img/users/${user.photo}`, alt="User Photo") 
+          if user.photo
+            img.form__user-photo(src=`/img/users/${user.photo}`, alt="User Photo")             
+          else
+            img.form__user-photo(src=`/img/${user.gender}.jpeg` alt='User photo')
         h1.m-auto= user.name
 
     div.w-25
