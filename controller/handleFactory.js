@@ -60,8 +60,7 @@ module.exports.createOne = Model =>
 // Filter , Sort , paginate , limit Fields
 module.exports.getAll = (Model, populateOption) =>
   catchAsync(async (req, res, next) => {
-    const filter = req.filter || {};
-    const docs = await new ApiFeatures(Model.find(filter), req.query)
+    const docs = await new ApiFeatures(Model.find({}), req.query)
       .filter()
       .sort()
       .limitFields()
